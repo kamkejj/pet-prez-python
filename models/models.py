@@ -10,6 +10,8 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
+    pet_name = db.Column(db.String(50), nullable=True)
+    pet_species = db.Column(db.String(50), nullable=True)
 
     def __repr__(self):
         return f'<User {self.username}>'
@@ -18,7 +20,9 @@ class User(db.Model):
         return {
             'id': self.id,
             'username': self.username,
-            'email': self.email
+            'email': self.email,
+            'pet_name': self.pet_name,
+            'pet_species': self.pet_species
         }
 
 class Slogan(db.Model):
