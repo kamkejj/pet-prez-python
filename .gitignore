@@ -1,0 +1,83 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+bin/
+
+# virenv cache
+CACHEDIR.TAG
+
+# Virtual Environment
+venv/
+virtualenv/
+ENV/
+.env/
+.venv/
+env.bak/
+venv.bak/
+pythonenv*
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Docker
+.dockerignore
+
+# Logs
+logs/
+*.log
+
+# Database
+*.sqlite3
+*.db
+
+# Environment variables
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Alembic
+# Don't ignore migrations directory or alembic.ini as they should be version controlled
+# But ignore alembic version files that need to be dynamically generated
+# migrations/versions/*
+# !migrations/versions/__init__.py
+
+# Local development configuration
+instance/
+local_settings.py
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
