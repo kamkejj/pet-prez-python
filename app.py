@@ -6,6 +6,9 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import OperationalError
 from dotenv import load_dotenv
 
+import models.models as models
+from models.models import db
+
 # Load environment variables
 load_dotenv()
 
@@ -20,27 +23,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Initialize SQLAlchemy
-db = SQLAlchemy(app)
-
-
-# Define models
-class User(db.Model):
-    __tablename__ = 'users'
-
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-
-    def __repr__(self):
-        return f'<User {self.username}>'
-
-    def to_dict(self):
-        return {
-            'id': self.id,
-            'username': self.username,
-            'email': self.email
-        }
-
+db.init_app(app)
 
 # Connection retry logic
 def connect_with_retry(retries=5, delay=5):
@@ -71,9 +54,13 @@ def index():
 
 @app.route('/users', methods=['GET'])
 def get_users():
-    users = User.query.all()
+    users = models.User.query.all()
     return jsonify([user.to_dict() for user in users])
 
+@app.route('/slogans/<int:user_id>', methods=['GET'])
+def get_slogans(user_id):
+    slogans = models.Slogan.query.filter_by(user_id=user_id).all()
+    return jsonify([slogan.to_dict() for slogan in slogans])
 
 @app.route('/health')
 def health():
